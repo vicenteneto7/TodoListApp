@@ -18,6 +18,7 @@ export default function App() {
 
   const addTask = async () => {
     setTasks([...tasks, newTask])
+    setNewTask('')
   }
 
   return (
@@ -58,6 +59,7 @@ export default function App() {
               placeholder="Adicionar tarefa"
               maxLength={25}
               onChangeText={text => setNewTask(text)}
+              value={newTask}
             />
             <TouchableOpacity onPress={() => addTask()} style={styles.Button}>
               <AntDesign name="right" size={25} color="white" />
