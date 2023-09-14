@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   FlatList,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";
 
@@ -15,9 +16,18 @@ export default function App() {
   const [tasks, setTasks] = useState(["oi"]);
   const [newTask, setNewTask] = useState("");
 
+  const addTask = async () => {
+    setTasks([...tasks, newTask])
+  }
+
   return (
     <>
-      <KeyboardAvoidingView>
+      <KeyboardAvoidingView
+        keyboardVerticalOffset={0}
+        behavior='padding'
+        style={{ flex: 1 }}
+        enabled={ Platform.OS === 'ios'}
+      >
         <View style={styles.container}>
           <View style={styles.Body}>
             <FlatList
@@ -47,8 +57,9 @@ export default function App() {
               autoCorrect={true}
               placeholder="Adicionar tarefa"
               maxLength={25}
+              onChangeText={text => setNewTask(text)}
             />
-            <TouchableOpacity style={styles.Button}>
+            <TouchableOpacity onPress={() => addTask()} style={styles.Button}>
               <AntDesign name="right" size={25} color="white" />
             </TouchableOpacity>
           </View>
