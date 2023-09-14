@@ -9,6 +9,7 @@ import {
   FlatList,
   KeyboardAvoidingView,
   Platform,
+  Keyboard
 } from "react-native";
 import { Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";
 
@@ -19,6 +20,8 @@ export default function App() {
   const addTask = async () => {
     setTasks([...tasks, newTask])
     setNewTask('')
+
+    Keyboard.dismiss()
   }
 
   return (
