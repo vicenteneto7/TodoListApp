@@ -65,10 +65,20 @@ export default function App() {
   }
 
   useEffect(() => {
-    const saveData = async () => {
-      AsyncStorage.setItem()
+    const loadData = async () => {
+      const task = await AsyncStorage.getItem("task")
+      if (task) {
+        setTasks(JSON.parse(task))
+      }
     }
+    loadData()
+  }, [])
 
+  useEffect(() => {
+    const saveData = async () => {
+      AsyncStorage.setItem("tasks", JSON.stringify(tasks))
+    }
+    saveData()
   }, [tasks])
 
   return (
