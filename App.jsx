@@ -9,20 +9,67 @@ import {
   FlatList,
   KeyboardAvoidingView,
   Platform,
-  Keyboard
+  Keyboard,
+  Alert
 } from "react-native";
 import { Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
-  const [tasks, setTasks] = useState(["oi"]);
+  const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
 
   const addTask = async () => {
+    const search = tasks.filter( task => task == newTask )
+
+    if (newTask == ''){
+      return
+    }
+
+    if (search.length !== 0) {
+      Alert.alert("Atenção", "Nome da tarefa repetido!")
+      return
+    } 
+
     setTasks([...tasks, newTask])
     setNewTask('')
 
     Keyboard.dismiss()
   }
+
+  const removeTask = async (item) => {
+    Alert.alert(
+      "Deletar tarefa",
+      "Tem certeza que dejsa remove essa anotação?",
+      [
+        {
+          text: 'Cancel',
+          onPress: () => {
+            return
+          },
+          style: 'cancel'
+        },
+        {
+          text: 'Ok',
+          onPress: () => {setTasks(tasks.filter(tasks => tasks !== item ))}
+
+        }
+      ],
+      {
+        cancelable: false
+      }
+    )
+
+
+    setTasks(tasks.filter(tasks => tasks !== item ))
+  }
+
+  useEffect(() => {
+    const saveData = async () => {
+      AsyncStorage.setItem()
+    }
+
+  }, [tasks])
 
   return (
     <>
@@ -42,7 +89,7 @@ export default function App() {
               renderItem={({ item }) => (
                 <View style={styles.ConainerView}>
                   <Text style={styles.Text}>{item}</Text>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => removeTask(item)}>
                     <MaterialIcons
                       name="delete-forever"
                       size={26}
