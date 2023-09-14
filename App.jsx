@@ -117,7 +117,7 @@ export default function App() {
               placeholderTextColor="#999"
               autoCorrect={true}
               placeholder="Adicionar tarefa"
-              maxLength={25}
+              maxLength={40}
               onChangeText={text => setNewTask(text)}
               value={newTask}
             />

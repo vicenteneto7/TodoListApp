@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "TodoListApp",
-    "slug": "TodoListApp",
+    "name": "Lista de Tarefas",
+    "slug": "lista-de-tarefas",
+    "owner": "vicente_neto",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,16 +16,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.vicenteneto.listadetarefas"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.vicente_neto.listadetarefas"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c822b57c-6aaf-42ff-828b-3ed5bb7c0b28"
+      }
     }
   }
 }
